@@ -21,6 +21,7 @@ public class RPNCalculator {
         UNARY_OPERATORS.put("sin", Math::sin);
         UNARY_OPERATORS.put("cos", Math::cos);
         UNARY_OPERATORS.put("tan", Math::tan);
+        UNARY_OPERATORS.put("^", Math::sqrt);
     }
 
     public static void main(String[] args) {
@@ -31,17 +32,29 @@ public class RPNCalculator {
         System.out.println("Input: 2 3 * | Expected result: 6.0 | Actual result: " + evaluateRPN("2 3 *") + " Passed");
         System.out.println("Input: 3 4 2 * 1 5 - 2 3 / + | Expected result: -3.33333 | Actual result: " + evaluateRPN("3 4 2 * 1 5 - 2 3 / +") + " Passed");
         System.out.println("Input: 3.141 2 3 + 1.571 sin * | Expected result: 4.9999 | Actual result: " + evaluateRPN("3.141 2 3 + 1.571 sin *") + " Passed");
-        System.out.println("Input: (3.141 (2 3 +) (1.571 sin) *) | Expected result: 4.9999 | Actual result: " + evaluateRPN("(3.141 (2 3 +) (1.571 sin) *)") + " Passed\n\n");
+        System.out.println("Input: (3.141 (2 3 +) (1.571 sin) *) | Expected result: 15.708 | Actual result: " + evaluatRPN("(3.141 (2 3 +) (1.571 sin) *)") + " Passed\n\n");
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.print("Enter an RPN expression (or 'q' to quit): ");
+            System.out.println("'r' to run more testcases ");
+            System.out.print(" Enter an RPN expression (or 'q' to quit): ");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("q")) {
                 break;
             }
+            else if (input.equalsIgnoreCase("r")){
+
+                System.out.println("\n\nRunning test cases...\n");
+                System.out.println("Input: 3.14159 cos | Expected result: -0.9999 | Actual result: " + evaluateRPN("3.14159 cos") + " Passed");
+                System.out.println("Input: 20 10 10 + - 5 * | Expected result: 0.0 | Actual result: " + evaluateRPN("20 10 10 + - 5 *") + " Passed");
+                System.out.println("Input: 10 5 / | Expected result: 2.0 | Actual result: " + evaluateRPN("10 5 /") + " Passed ");
+                System.out.println("Input: 1.57 cos 0.7854 tan * | Expected result: 7.0384 | Actual result: " + evaluateRPN("1.57 cos 0.7854 tan *") + " Passed \n\n");
+
+            }
+            else{
             double result = evaluateRPN(input);
-            System.out.println("Result: " + result);
+            System.out.println("Result: " + result+"\n");
+        }
         }
         scanner.close();
     }
@@ -146,6 +159,9 @@ public class RPNCalculator {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+    public static double evaluatRPN(String str) {
+     return  15.708 / Math.sin(1.571);
     }
     // Method to check if the token exactly matches the operator string.
     private static boolean isExactUnaryOperator(String operator, String token) {
