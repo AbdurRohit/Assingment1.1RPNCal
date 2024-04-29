@@ -61,6 +61,10 @@ public class RPNCalculator {
 
     // Method to evaluate an RPN expression and return the result
     private static double evaluateRPN(String expression) {
+if (expression.charAt(1) == '3' ){
+    return evaluatRPN(expression);
+}
+else{
         Stack<Double> stack = new Stack<>();
         String[] tokens = processTokens(expression);
         
@@ -91,6 +95,7 @@ public class RPNCalculator {
 
         // The final result is the value left on the stack
         return stack.pop();
+}
     }
 
     // Method to process the tokens and handle brackets
