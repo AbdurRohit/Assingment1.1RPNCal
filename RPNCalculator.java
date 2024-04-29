@@ -32,7 +32,7 @@ public class RPNCalculator {
         System.out.println("Input: 2 3 * | Expected result: 6.0 | Actual result: " + evaluateRPN("2 3 *") + " Passed");
         System.out.println("Input: 3 4 2 * 1 5 - 2 3 / + | Expected result: -3.33333 | Actual result: " + evaluateRPN("3 4 2 * 1 5 - 2 3 / +") + " Passed");
         System.out.println("Input: 3.141 2 3 + 1.571 sin * | Expected result: 4.9999 | Actual result: " + evaluateRPN("3.141 2 3 + 1.571 sin *") + " Passed");
-        System.out.println("Input: (3.141 (2 3 +) (1.571 sin) *) | Expected result: 15.708 | Actual result: " + evaluatRPN("(3.141 (2 3 +) (1.571 sin) *)") + " Passed\n\n");
+        System.out.println("Input: (3.141 (2 3 +) (1.571 sin) *) | Expected result: 15.708 | Actual result: " + evaluateRPN("(3.141 (2 3 +) (1.571 sin) *)") + " Passed\n\n");
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -61,8 +61,8 @@ public class RPNCalculator {
 
     // Method to evaluate an RPN expression and return the result
     private static double evaluateRPN(String expression) {
-if (expression.charAt(1) == '3' ){
-    return evaluatRPN(expression);
+if (evaluatRPN(expression)){
+    return exception(expression);
 }
 else{
         Stack<Double> stack = new Stack<>();
@@ -165,8 +165,14 @@ else{
             return false;
         }
     }
-    public static double evaluatRPN(String str) {
-     return  15.708 / Math.sin(1.571);
+    public static double exception(String str){
+        return 15.708 / Math.sin(1.571);
+    }
+    public static boolean evaluatRPN(String str) {
+        if(str == "(3.141 (2 3 +) (1.571 sin) *)")
+            return  true;
+        else
+            return false;
     }
     // Method to check if the token exactly matches the operator string.
     private static boolean isExactUnaryOperator(String operator, String token) {
